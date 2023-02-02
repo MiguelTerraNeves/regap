@@ -1,0 +1,16 @@
+nodes:
+  n1:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n2:
+    _type: Node
+    constraint: n2["instruction"]["node"]["_type"] == "Call"
+  n3:
+    _type: WildCard.ZeroPlusNodeSubGraph
+
+edges:
+  n1:
+    n2:
+      constraint: True
+  n2:
+    n3:
+      constraint: n2_n3["_branch_type"] == "Sequence"

@@ -1,0 +1,67 @@
+nodes:
+  n0:
+    _type: Node
+    constraint: n0["instruction"]["node"]["_type"] in {"arguments", "Expr"}
+  n1:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n2:
+    _type: Node
+    constraint: any(isinstance(acc, dict) and acc["_type"] == "For" for acc_lst in n2["instruction"]["accesses"] for acc in acc_lst)
+  n3:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n4:
+    _type: Node
+    constraint: any(isinstance(acc, dict) and acc["_type"] == "For" for acc_lst in n4["instruction"]["accesses"] for acc in acc_lst)
+  n5:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n6:
+    _type: Node
+    constraint: any(isinstance(acc, dict) and acc["_type"] == "For" for acc_lst in n6["instruction"]["accesses"] for acc in acc_lst)
+  n7:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n8:
+    _type: Node
+    constraint: n8["instruction"]["node"]["_type"] == "Expr" and n8["instruction"]["node"]["value"]["_type"] == "Yield"
+  n9:
+    _type: WildCard.ZeroPlusNodeSubGraph
+
+edges:
+  n0:
+    n1:
+      constraint: n0_n1["_branch_type"] == "Sequence"
+  n1:
+    n2:
+      constraint: True
+  n2:
+    n3:
+      constraint: n2_n3["_branch_type"] == "True"
+    n9:
+      constraint: n2_n9["_branch_type"] == "False"
+  n3:
+    n4:
+      constraint: True
+    n2:
+      constraint: True
+  n4:
+    n5:
+      constraint: n4_n5["_branch_type"] == "True"
+    n3:
+      constraint: n4_n3["_branch_type"] == "False"
+  n5:
+    n6:
+      constraint: True
+    n4:
+      constraint: True
+  n6:
+    n7:
+      constraint: n6_n7["_branch_type"] == "True"
+    n5:
+      constraint: n6_n5["_branch_type"] == "False"
+  n7:
+    n8:
+      constraint: True
+    n6:
+      constraint: True
+  n8:
+    n7:
+      constraint: n8_n7["_branch_type"] == "Sequence"

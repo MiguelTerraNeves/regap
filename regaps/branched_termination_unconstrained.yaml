@@ -1,0 +1,14 @@
+nodes:
+  n1:
+    _type: WildCard.OnePlusNodeSubGraph
+  n2:
+    _type: WildCard.OnePlusNodeSubGraph
+  n3:
+    _type: WildCard.OnePlusNodeSubGraph
+
+edges:
+  n1:
+    n2:
+      constraint: n1_n2["_branch_type"] == "True"
+    n3:
+      constraint: n1_n3["_branch_type"] == "False"

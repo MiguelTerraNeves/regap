@@ -1,0 +1,55 @@
+nodes:
+  n0:
+    _type: Node
+    constraint: n0["instruction"]["node"]["_type"] in {"arguments", "Expr"}
+  n1:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n2:
+    _type: Node
+    constraint: n2["instruction"]["node"]["_type"] == "Assign"
+  n3:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n4:
+    _type: Node
+    constraint: any(isinstance(acc, dict) and acc["_type"] == "For" for acc_lst in n4["instruction"]["accesses"] for acc in acc_lst)
+  n5:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n6:
+    _type: Node
+    constraint: n6["instruction"]["node"]["_type"] == "Assign"
+
+edges:
+  n0:
+    n1:
+      constraint: n0_n1["_branch_type"] == "Sequence"
+  n1:
+    n2:
+      constraint: True
+  n2:
+    n3:
+      constraint: n2_n3["_branch_type"] == "Sequence"
+  n3:
+    n4:
+      constraint: True
+  n4:
+    n5:
+      constraint: n4_n5["_branch_type"] == "True"
+    n1:
+      constraint: n4_n1["_branch_type"] == "False"
+  n5:
+    n6:
+      constraint: True
+    n4:
+      constraint: True
+  n6:
+    n5:
+      constraint: n6_n5["_branch_type"] == "Sequence"
+
+pair_relations:
+  n2:
+    n6:
+      definitions: >
+        def targetNames(ts):
+          return map(lambda t: t["id"], filter(lambda t: t["_type"] == "Name", ts))
+      constraint: >
+        any(name in targetNames(n6["instruction"]["node"]["targets"]) for name in targetNames(n2["instruction"]["node"]["targets"]))

@@ -1,0 +1,40 @@
+nodes:
+  n0:
+    _type: Node
+    constraint: n0["instruction"]["node"]["_type"] in {"arguments", "Expr"}
+  n1:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n2:
+    _type: Node
+    constraint: any(isinstance(acc, dict) and acc["_type"] == "For" for acc_lst in n2["instruction"]["accesses"] for acc in acc_lst)
+  n3:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n4:
+    _type: Node
+    constraint: n4["instruction"]["node"]["_type"] == "Call"
+  n5:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n6:
+    _type: WildCard.ZeroPlusNodeSubGraph
+
+edges:
+  n0:
+    n1:
+      constraint: n0_n1["_branch_type"] == "Sequence"
+  n1:
+    n2:
+      constraint: True
+  n2:
+    n3:
+      constraint: n2_n3["_branch_type"] == "True"
+    n6:
+      constraint: n2_n6["_branch_type"] == "False"
+  n3:
+    n4:
+      constraint: True
+  n4:
+    n5:
+      constraint: n4_n5["_branch_type"] == "Sequence"
+  n5:
+    n2:
+      constraint: True

@@ -1,0 +1,20 @@
+nodes:
+  n1:
+    _type: WildCard.ZeroPlusNodeSubGraph
+  n2:
+    _type: Node
+    constraint: n2["instruction"]["node"]["_type"] in {"Compare", "Call", "Name", "UnaryOp"}
+  n3:
+    _type: WildCard.OnePlusNodeSubGraph
+  n4:
+    _type: WildCard.OnePlusNodeSubGraph
+
+edges:
+  n1:
+    n2:
+      constraint: True
+  n2:
+    n3:
+      constraint: n2_n3["_branch_type"] == "True"
+    n4:
+      constraint: n2_n4["_branch_type"] == "False"
