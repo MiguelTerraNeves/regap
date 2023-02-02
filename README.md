@@ -4,7 +4,7 @@ This repository contains the ReGaPs used in our paper in YAML format and a binar
 The binary was built on the Ubuntu 18.04 subsystem for Windows.
 
 You can run the binary with default settings as follows:
-```console
+```
 ./main.bin <path to graphs file> <path to regap file>
 ```
 This will run the ReGaP matcher with the given ReGaP for each graph in the given graphs file.
