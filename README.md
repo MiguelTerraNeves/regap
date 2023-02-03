@@ -17,6 +17,6 @@ The binary provides the following options:
 - `--disable-node-merge`: disable the node merging preprocessing heuristic
 - `--graphviz`: generate GraphViz visualizations for the input graphs and the ReGaP
 
-The benchmarks used in the experimental evaluation can be obtained from [here](https://open-access-data.s3.eu-west-1.amazonaws.com/csn_python_cfgs).
+The benchmarks used in the experimental evaluation can be obtained from [here](https://open-access-data.s3.eu-west-1.amazonaws.com/csn_python_cfgs.zip).
 
 © 2023 OutSystems
