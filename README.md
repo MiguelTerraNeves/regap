@@ -2,6 +2,11 @@
 
 This repository contains the ReGaPs used in our paper in YAML format and a binary that can be used to replicate the results of the paper.
 The binary was built on the Ubuntu 18.04 subsystem for Windows.
+Note that the binary is a bit bloated in size, which we understand may seem suspicious.
+This is because the binary was built from a Python implementation of the ReGaP matcher, which was then compiled to C, together with all its dependencies, using Nuitka in order to introduce an additional layer of obfuscation.
+This process introduces a lot of bloat in the resulting C code.
+We would much rather make the source code available than having to go through all this process, but unfortunately we are not authorized to do so.
+Nonetheless, any trust issues regarding the binary can be solved by running it contained within a virtual machine.
 
 You can run the binary with default settings as follows:
 ```
